@@ -1,0 +1,7 @@
+--- 
+de-CH: 
+  limit_per_user: "Kaufbegrenzung"
+  activerecord:
+    attributes:
+      product:
+        limit_per_user: "Kaufbegrenzung"

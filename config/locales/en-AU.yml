@@ -1,0 +1,7 @@
+---
+en-AU: 
+  limit_per_user: "Limit per Customer"
+  activerecord:
+    attributes:
+      product:
+        limit_per_user: "Limit per Customer"
