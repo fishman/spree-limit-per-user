@@ -14,9 +14,14 @@ class LimitPerUserExtension < Spree::Extension
   
   def activate
 
-    # make your helper avaliable in all views
-    # Spree::BaseController.class_eval do
-    #   helper YourHelper
-    # end
+    LineItem.class_eval do
+      def increment_quantity
+        self.quantity
+      end
+
+      def decrement_quantity
+        self.quantity
+      end
+    end
   end
 end
