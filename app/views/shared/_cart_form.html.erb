@@ -32,7 +32,9 @@
     </ul>
   </div>
 <% end%>
-<% if @product.has_stock? || Spree::Config[:allow_backorders] %>
+<% if @product.already_purchased? %>
+  <%= content_tag('strong', t('already_purchased')) %>
+<% elsif @product.has_stock? || Spree::Config[:allow_backorders] %>
   <%= hidden_field_tag (@product.has_variants? ? :quantity : "variants[#{@product.master.id}]"),
     1 %>
   &nbsp;
