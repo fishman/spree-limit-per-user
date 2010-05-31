@@ -14,6 +14,20 @@ class LimitPerUserExtension < Spree::Extension
   
   def activate
 
+    Product.class_eval do
+      def already_purchased?
+        purchased = false
+
+        user = UserSession.find.user if UserSession.find
+        orders = Order.find_all_by_user_id user.id
+        orders.each do |order|
+          line_item = LineItem.conditions('variant_id = ? AND order_id = ?', master.id, order.id).all
+          purchased = true if line_item.size > 0
+        end
+        purchased
+      end
+    end
+
     LineItem.class_eval do
       def increment_quantity
         self.quantity
