@@ -19,7 +19,11 @@ class LimitPerUserExtension < Spree::Extension
         purchased = false
 
         user = UserSession.find.user if UserSession.find
-        orders = Order.find_all_by_user_id user.id
+        if user
+          orders = Order.find_all_by_user_id user.id
+        else
+          orders = []
+        end
         orders.each do |order|
           line_item = LineItem.conditions('variant_id = ? AND order_id = ?', master.id, order.id).all
           purchased = true if line_item.size > 0
